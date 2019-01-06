@@ -2,7 +2,7 @@
 var addToAlbum = document.querySelector(".add-img-btn");
 var photoInput = document.querySelector(".choose-file-btn")
 var titleInput = document.querySelector(".title-input");
-var bodyInput = document.querySelector(".body-input");
+var captionInput = document.querySelector(".caption-input");
 var photoGallery = document.querySelector(".album-field");
 var imagesArr = JSON.parse(localStorage.getItem("imagesArr")) || [];
 var reader = new FileReader();
@@ -34,13 +34,13 @@ function createElement(e) {
 
 function addPhoto(e) {
   // console.log(e.target.result);
-  var newPhoto = new Photo(Date.now(), titleInput.value, bodyInput.value, e.target.result);
+  var newPhoto = new Photo(Date.now(), titleInput.value, captionInput.value, e.target.result);
   displayPhotoCard(newPhoto.value, newPhoto.file, newPhoto.caption);
   imagesArr.push(newPhoto);
   newPhoto.saveToStorage(imagesArr);
 }
 
-function displayPhotoCard(titleVal, imgSrc, bodyVal) {
+function displayPhotoCard(titleVal, imgSrc, captionVal) {
   photoGallery.innerHTML += 
   `
     <article class="card">
@@ -52,7 +52,7 @@ function displayPhotoCard(titleVal, imgSrc, bodyVal) {
         </section>
         <section class="card-caption">
           <h2>
-            ${bodyVal}
+            ${captionVal}
           </h2>
         </section>
         <section class="card-buttons">
