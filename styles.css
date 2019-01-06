@@ -1,0 +1,75 @@
+body {
+  background-image: url(assets/back-placeholder.png);
+  background-repeat: none;
+  background-size: cover;
+  font-family: 'Open Sans', sans-serif;
+  display: grid;
+  grid-template-areas: 
+    "header"
+    "form"
+    "cards";  
+
+}
+
+header {
+  /*border: 1px black solid;*/
+  /*display: flex;*/
+}
+
+.magnifying-glass {
+  /*width: 1.2rem;*/
+}
+
+.logo-img {
+  width: 4.4rem;
+}
+
+.logo {
+  /*justify-content: flex-start;*/
+  /*margin: 0;*/
+  /*padding: 0;*/
+  /*margin-left: 2.1rem;*/
+}
+
+p {
+  /*color: blue;*/
+  /*font-weight: bold;*/
+  /*font-size: 3.6rem;*/
+}
+
+.search {
+  /*grid-area: search;*/
+}
+
+.card {
+  height: 300px;
+  margin: 20px;
+  width: 200px;
+  border: 1px black solid;
+}
+
+.foto-generation-area {
+  /*display: flex;*/
+  /*justify-content: center;*/
+  /*align-items: center;*/
+  /*flex-direction: ;*/
+}
+
+.album-field {
+  height: 5rem;
+  width: 5rem;
+}
+
+.card-photo-container {
+  height: 400px;
+}
+
+#card-img {
+  height: 3rem;
+  width: 3rem;
+}
+
+.icon {
+  height: 2rem;
+  width: 2rem;
+}
