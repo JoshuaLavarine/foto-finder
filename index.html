@@ -2,54 +2,51 @@
 <html>
   <head>
     <link rel="stylesheet" type="text/css" href="normalize.css">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,800" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,800" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
     <header>
-      <article class="logo">
+      <article class="logo header-items">
         <h1>
           FOTO
-        </h1>
-        <img src="foto-finder-logo.svg">
-        <h1>
+          <img src="assets/foto-finder-logo.svg" class="logo-img">
           FINDER
         </h1>
       </article>
-      <article>
+      <article class="search">
         <input type="text" name="" class="search-bar" placeholder="Search">
-        <button id="search-btn">
-          <!-- <i class="fas fa-search"></i> -->
-          <!-- add image of spyglass here -->
+        <button class="search-btn">
+          <img src="assets/magnifying-glass.svg" class="magnifying-glass">
         </button>
       </article>
     </header>
-    <section class="foto-generation-area">
-      <form class="foto-generation-content">
-        <label for="title">
+    <section class="foto-gen-area">
+      <form class="foto-gen-content">
+        <label for="title" class="form-labels">
           Title
         </label>
-        <input type="text" id="title">
-        <label for="body">
-          Body
+        <input type="text" id="title" class="title input">
+        <label for="caption" class="form-labels">
+          Caption
         </label>
-        <textarea type="text" id="body">
-        </textarea>
-        <button class="choose-file-btn">
+        <textarea type="text" id="caption" class="caption input"></textarea>
+        <input id="choose" class="choose-file-btn" type='file' accept='image/png, image/jpg' />
+        <label for="choose" class="btn choose-btn">
           Choose File
-        </button>
-        <button>
+        </label>
+        <button class="btn view-fav-btn">
           View 1 Favorites
         </button>
-        <button>
+        <button class="btn add-img-btn">
           Add to Album
         </button>
       </form>
     </section>
-    <section class="picture-field">
+    <section class="album-field">
     </section>
-    <script src="main.js"></script>
-    <script src="photo.js"></script>
+    <script type="text/javascript" src="photo.js"></script>
+    <script type="text/javascript" src="main.js"></script>
   </body>
 </html>
