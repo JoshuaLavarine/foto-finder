@@ -19,11 +19,9 @@ cardSection.addEventListener("click", manipulateCard);
 // --------------------FUNCTIONS---------------------------
 //Persist
 function appendPhotos(array) {
-  //if this isn't here, I get extra imagesArr array items 
   imagesArr = [];
   array.forEach(function (card) {
     var newPhoto = new Photo(card.id, card.title, card.caption, card.file, card.favorite);
-    // console.log(newPhoto);
     imagesArr.push(newPhoto);
     displayPhotoCard(card);
   })
@@ -38,7 +36,6 @@ function stringPhotos() {
 }
 
 function addPhoto(e) {
-  // e.preventDefault();
   var newPhoto = new Photo(Date.now(), titleInput.value, captionInput.value, e.target.result, false);
   imagesArr.push(newPhoto);
   newPhoto.saveToStorage();
@@ -86,53 +83,6 @@ function manipulateCard(e) {
     deletePhotoCard();
 }}
 
-
-// function deletePhotoCard(id) {
-//   var uniqueId = parseInt(event.target.parentElement.parentElement.parentElement.dataset.id);
-//   console.log(uniqueId)
-//   console.log(id);
-//   var newPhoto = new Photo(uniqueId.id, uniqueId.title, uniqueId.caption, uniqueId.file, uniqueId.favorite);
-//   // var parsedId = JSON.parse(localStorage.getItem(uniqueId));
-//   // console.log(parsedId, 'should be here');
-//   // var selectedId = document.querySelector("")
-//   newPhoto.remove();
-//   var index = imagesArr.findIndex(function(image) {
-//     return image === id.id;
-//   });
-//   index.deleteFromStorage(imagesArr, index.id);
-// }
-
-  // if (event.target.classList.contains("favorite")) {
-  //   editCard();
-//   })
-// }
-
-// function deletePhotoCard(e) {
-//   e.preventDefault();
-//   var deleteButton = document.querySelector("#delete-btn");
-//   deleteButton.addEventListener("click", deletePhotoCard);
-//   var uniqueId = event.target.closest.dataset.id;
-//   var index = imagesArr.findIndex(function(photo) {
-//     return photo.id === parseInt(uniqueId);
-//   });
-//   imagesArr[index].deleteFromStorage();
-//   imagesArr.splice(index, 1);
-//   event.target.closest(dataset.id).remove();
-// }
-
-
-// //Duy help
-// function deletePhotoCard() {
-//   var uniqueId = event.target.parentElement.parentElement.parentElement.dataset.id;
-//   var parsedId = parseInt(uniqueId);
-//   console.log(typeof parsedId);
-//   // parsedId.remove();
-//   var index = imagesArr.findIndex(function(photo) {
-//     return photo.id === parseInt(parsedId);
-//   });
-//   imagesArr[index].deleteFromStorage();
-// }
-
 function deletePhotoCard() {
   var uniqueId = event.target.parentElement.parentElement.parentElement.dataset.id;
   var parsedId = parseInt(uniqueId);
@@ -143,13 +93,3 @@ function deletePhotoCard() {
   });
   imagesArr[index].deleteFromStorage();
   event.target.parentElement.parentElement.parentElement.remove();}
-
-// function reloadPhotoCards() {
-//  Object.keys(localStorage).forEach(function(key) {
-//   var thisCard = JSON.parse(localStorage.getItem(key))
-//   addPhoto(thisCard);
-//   var newIdea = new Idea(thisCard.id, thisCard.title, thisCard.body, thisCard.quality);
-//   imagesArr.push(newIdea);
-//  })
-// }
-// --------------------
