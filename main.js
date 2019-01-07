@@ -38,7 +38,7 @@ function stringPhotos() {
 }
 
 function addPhoto(e) {
-  e.preventDefault();
+  // e.preventDefault();
   var newPhoto = new Photo(Date.now(), titleInput.value, captionInput.value, e.target.result, false);
   imagesArr.push(newPhoto);
   newPhoto.saveToStorage();
@@ -142,15 +142,14 @@ function deletePhotoCard() {
     return photo.id === parseInt(parsedId);
   });
   imagesArr[index].deleteFromStorage();
-  reloadPhotoCards();
-}
+  event.target.parentElement.parentElement.parentElement.remove();}
 
-function reloadPhotoCards() {
- Object.keys(localStorage).forEach(function(key) {
-  var thisCard = JSON.parse(localStorage.getItem(key))
-  appendPhotos(thisCard);
-  var newIdea = new Idea(thisCard.id, thisCard.title, thisCard.body, thisCard.quality);
-  imagesArr.push(newIdea);
- })
-}
+// function reloadPhotoCards() {
+//  Object.keys(localStorage).forEach(function(key) {
+//   var thisCard = JSON.parse(localStorage.getItem(key))
+//   addPhoto(thisCard);
+//   var newIdea = new Idea(thisCard.id, thisCard.title, thisCard.body, thisCard.quality);
+//   imagesArr.push(newIdea);
+//  })
+// }
 // --------------------
