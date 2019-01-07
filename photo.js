@@ -14,6 +14,8 @@ class Photo {
     this.saveToStorage(imagesArr);
   }
   updatePhoto() {
-
+   // var stringIdea = JSON.stringify(this);
+   //  localStorage.setItem(this.id, stringIdea);
+  console.log("Connected");
   }
 }

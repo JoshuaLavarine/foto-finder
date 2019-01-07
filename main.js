@@ -15,6 +15,7 @@ var reader = new FileReader();
 window.addEventListener('load', appendPhotos(imagesArr));
 addToAlbum.addEventListener("click", stringPhotos);
 cardSection.addEventListener("click", manipulateCard);
+// cardSection.addEventListener("keydown", editCard);
 
 // --------------------FUNCTIONS---------------------------
 //Persist
@@ -46,13 +47,13 @@ function displayPhotoCard(object) {
   photoGallery.innerHTML += 
   `
     <article class="card" data-id=${object.id}>
-        <h2 class="card-title">
+        <h2 class="card-title" contenteditable="true">
             ${object.title}
         </h2>
         <section class="card-photo-container">
            <img id="card-img" src=${object.file} />
         </section>
-        <section class="card-caption">
+        <section class="card-caption" contenteditable="true">
           <h2>
             ${object.caption}
           </h2>
@@ -81,6 +82,10 @@ function manipulateCard(e) {
   if (event.target.classList.contains("delete")) {
     console.log(event.target);
     deletePhotoCard();
+  }
+  if (event.target.classList.contains("favorite")) {
+    console.log(event.target);
+    favoriteCard();
 }}
 
 function deletePhotoCard() {
@@ -92,4 +97,43 @@ function deletePhotoCard() {
     return photo.id === parseInt(parsedId);
   });
   imagesArr[index].deleteFromStorage();
-  event.target.parentElement.parentElement.parentElement.remove();}
+  event.target.parentElement.parentElement.parentElement.remove();
+}
+
+function favoriteCard() {
+  var clickedCard = event.target.closest("article");
+  (console.log(clickedCard + " clicked card html"));
+  var parsedCard = parseInt(clickedCard.dataset.id);
+  var foundCard = imagesArr.find(function(photo) {
+    return photo.id === parsedCard;
+  })
+  foundCard.updatePhoto();
+}
+
+// function editCard(event) {
+//   if(!event){
+//     return
+//   }
+//   var uniqueID = event.target.parentElement.dataset.id;
+//   console.log(uniqueID + " card unique ID");
+//   var foundPhotoCard = imagesArr.find(function(photo) {
+//     console.log(foundPhotoCard + " foundPhotoCard")
+//     return photo.id === parseInt(uniqueID);
+//     })
+//   if (event.target.id === 'card-title') {
+//     var editTitle = event.target.innerText;
+//     foundPhotoCard.title = editTitle;
+//     foundPhotoCard.saveToStorage();
+//   }
+//    if (event.target.id === 'card-caption') {
+//     var editCaption = event.target.innerText;
+//     foundPhotoCard.body = editCaption;
+//     foundPhotoCard.saveToStorage();
+//   }
+//   if (event.keyCode === 13) {
+//     event.target.toggleAttribute('contenteditable');
+//   }
+
+//   if (event.keyCode === 13) {
+//     event.target.toggleAttribute('contenteditable');
+//   }
