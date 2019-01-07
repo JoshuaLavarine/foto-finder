@@ -33,8 +33,13 @@ header {
   align-items: center;
   display: flex;
   justify-content: flex-end;
-  margin: 1rem;
+  /*margin: 1rem;*/
   width: 35%;
+  color: #FFF;
+  font-size: 27px;
+  padding-top: 9.5px;
+  /*padding-right: 20px;*/
+
 }
 
 .logo-img {
@@ -45,6 +50,7 @@ header {
   border-radius: 5px 0px 0px 5px;
   transition: all .2s ease;
   width: 370px;
+  height: 2.5rem;
 }
 
 .search-btn {
@@ -74,15 +80,19 @@ header {
   display: flex;
   flex-direction: column;
   font-size: 30px;
-  width: 56%;
+  width: 48.85%;
   /*align-items: center;*/
   /*background: #FFFFFF;*/
 }
 
-#title,
-#caption {
+#caption,
+#title {
   height: 55px;
   margin-top: 8px;
+}
+
+#choose {
+  display: none;
 }
 
 #caption {
@@ -90,7 +100,11 @@ header {
   height: 150px;
 }
 
-label {
+.input {
+  width: ;
+}
+
+.form-labels {
   /*color: #7C7879;*/
   margin-top: 32px;  
 }
@@ -105,6 +119,12 @@ label {
   height: 60px;
   margin-top: 20px;
   transition: all .2s ease;
+}
+
+.choose-btn {
+  box-sizing: border-box;
+  padding-left: 0;
+  padding-top: 0;
 }
 
 /*-----------
