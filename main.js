@@ -4,23 +4,29 @@ var photoInput = document.querySelector(".choose-file-btn")
 var titleInput = document.querySelector(".title-input");
 var captionInput = document.querySelector(".caption-input");
 var photoGallery = document.querySelector(".album-field");
+var deleteButton = document.querySelector("#delete-btn");;
+var cardSection = document.querySelector(".album-field");
+var viewFavorites = document.querySelector(".view-fav-btn");
 var imagesArr = JSON.parse(localStorage.getItem("imagesArr")) || [];
 var reader = new FileReader();
 
 
 // --------------------EVENT LISTENERS---------------------
 
-window.addEventListener('load', appendPhotos);
+window.addEventListener('load', appendPhotos(imagesArr));
 addToAlbum.addEventListener("click", createElement);
+cardSection.addEventListener("click", manipulateCard);
 
 // --------------------FUNCTIONS---------------------------
-
-
-function appendPhotos() {
-  imagesArr.forEach(function (photo) {
-    displayPhotoCard(photo.title, photo.file, photo.caption)
+//Persist
+function appendPhotos(array) {
+  imagesArr = [];
+  array.forEach(function (card) {
+    displayPhotoCard(card);
+    const newPhoto = new Photo(card.id, card.title, card.caption, card.file, card.favorite);
+    imagesArr.push(newPhoto);
   })
-}     
+}
 
 //Don't mess with this one (photo magic happening)
 function createElement(e) {
@@ -35,30 +41,76 @@ function createElement(e) {
 function addPhoto(e) {
   // console.log(e.target.result);
   var newPhoto = new Photo(Date.now(), titleInput.value, captionInput.value, e.target.result);
-  displayPhotoCard(newPhoto.value, newPhoto.file, newPhoto.caption);
+  displayPhotoCard(newPhoto);
   imagesArr.push(newPhoto);
-  newPhoto.saveToStorage(imagesArr);
+  newPhoto.saveToStorage();
 }
 
-function displayPhotoCard(titleVal, imgSrc, captionVal) {
+function displayPhotoCard(object) {
   photoGallery.innerHTML += 
   `
-    <article class="card">
+    <article class="card" data-id=${object.id}>
         <h2 class="card-title">
-            ${titleVal}
+            ${object.title}
         </h2>
         <section class="card-photo-container">
-           <img id="card-img" src=${imgSrc} />
+           <img id="card-img" src=${object.file} />
         </section>
         <section class="card-caption">
           <h2>
-            ${captionVal}
+            ${object.caption}
           </h2>
         </section>
         <section class="card-buttons">
-          <img class="delete icon" src="assets/delete.svg" />
-          <img class="favorite icon" src="assets/favorite.svg" />
+            <button id="delete-btn">
+              <img class="delete icon" src="assets/delete.svg" />
+            </button>
+            <button>
+              <img class="favorite icon" src="assets/favorite.svg" />
+            </button>
         </section>
       </article>
     `;
 }
+
+
+function manipulateCard(e) {
+  e.preventDefault();
+  var uniqueID = event.target.parentElement.parentElement.parentElement.dataset.id;
+  console.log(uniqueID);
+  var index = imagesArr.findIndex(function(photo) {
+    return photo.id === uniqueID;
+  })
+  if (event.target.classList.contains("delete")) {
+    deletePhotoCard();
+}}
+
+
+function deletePhotoCard() {
+  var uniqueID = event.target.parentElement.parentElement.parentElement.dataset.id;
+  console.log(uniqueID);
+  var index = imagesArr.findIndex(function(photo) {
+    return photo.id === parseInt(uniqueID);
+  });
+  imagesArr[index].deleteFromStorage();
+  event.target.closest(dataset.id).remove();
+}
+
+  // if (event.target.classList.contains("favorite")) {
+  //   editCard();
+//   })
+// }
+
+
+// function deletePhotoCard(e) {
+//   e.preventDefault();
+//   var deleteButton = document.querySelector("#delete-btn");
+//   deleteButton.addEventListener("click", deletePhotoCard);
+//   var uniqueID = event.target.closest.dataset.id;
+//   var index = imagesArr.findIndex(function(photo) {
+//     return photo.id === parseInt(uniqueID);
+//   });
+//   imagesArr[index].deleteFromStorage();
+//   imagesArr.splice(index, 1);
+//   event.target.closest(dataset.id).remove();
+// }
