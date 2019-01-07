@@ -14,8 +14,9 @@ class Photo {
     this.saveToStorage(imagesArr);
   }
   updatePhoto() {
-   // var stringIdea = JSON.stringify(this);
-   //  localStorage.setItem(this.id, stringIdea);
-  console.log("Connected");
+    if (event.target.classList.contains("favorite")) {
+      this.favorite = !this.favorite;
+      this.saveToStorage(imagesArr);
   }
+}
 }
