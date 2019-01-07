@@ -1,8 +1,8 @@
 // --------------------GLOBAL VARIABLES--------------------
 var addToAlbum = document.querySelector(".add-img-btn");
 var photoInput = document.querySelector(".choose-file-btn");
-var titleInput = document.querySelector(".title-input");
-var captionInput = document.querySelector(".caption-input");
+var titleInput = document.querySelector("#title");
+var captionInput = document.querySelector("#caption");
 var photoGallery = document.querySelector(".album-field");
 var deleteButton = document.querySelector("#delete-btn");
 var cardSection = document.querySelector(".album-field");
@@ -22,16 +22,15 @@ function appendPhotos(array) {
   //if this isn't here, I get extra imagesArr array items 
   imagesArr = [];
   array.forEach(function (card) {
-    displayPhotoCard(card);
     var newPhoto = new Photo(card.id, card.title, card.caption, card.file, card.favorite);
     // console.log(newPhoto);
     imagesArr.push(newPhoto);
+    displayPhotoCard(card);
   })
 }
 
 //Don't mess with this one (photo magic happening)
-function stringPhotos(e) {
-  e.preventDefault();
+function stringPhotos() {
   if (photoInput.files[0]) {
     reader.readAsDataURL(photoInput.files[0]); 
     reader.onload = addPhoto
@@ -39,11 +38,11 @@ function stringPhotos(e) {
 }
 
 function addPhoto(e) {
-  // console.log(e.target.result);
-  var newPhoto = new Photo(Date.now(), e.value, e.value, e.target.resul);
-  displayPhotoCard(newPhoto);
+  e.preventDefault();
+  var newPhoto = new Photo(Date.now(), titleInput.value, captionInput.value, e.target.result, false);
   imagesArr.push(newPhoto);
   newPhoto.saveToStorage();
+  displayPhotoCard(newPhoto);
 }
 
 function displayPhotoCard(object) {
@@ -70,7 +69,7 @@ function displayPhotoCard(object) {
             </button>
         </section>
       </article>
-    `;
+    `
 }
 //keep functions under 10 lines
 
