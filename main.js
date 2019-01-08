@@ -54,9 +54,9 @@ function displayPhotoCard(object) {
            <img id="card-img" src=${object.file} />
         </section>
         <section class="card-caption" contenteditable="true">
-          <h2>
+          <p class="card-caption-copy">
             ${object.caption}
-          </h2>
+          </p>
         </section>
         <section class="card-buttons">
             <button id="delete-btn">
