@@ -22,30 +22,39 @@
         </button>
       </article>
     </header>
-    <section class="foto-gen-area">
-      <form class="foto-gen-content">
-        <label for="title" class="form-labels">
-          Title
-        </label>
-        <input type="text" id="title" class="title input">
-        <label for="caption" class="form-labels">
-          Caption
-        </label>
-        <textarea type="text" id="caption" class="caption input"></textarea>
-        <input id="choose" class="choose-file-btn" type='file' accept='image/png, image/jpg' />
-        <label for="choose" class="btn choose-btn">
-          Choose File
-        </label>
-        <button class="btn view-fav-btn">
-          View 1 Favorites
-        </button>
-        <button class="btn add-img-btn">
-          Add to Album
-        </button>
-      </form>
-    </section>
-    <section class="album-field">
-    </section>
+
+    <main class="main_photo-inputs">
+      <section class="foto-gen-area">
+        <form class="foto-gen-content">
+          <label for="title" class="form-labels">
+            Title
+          </label>
+          <input type="text" id="title" class="title input" />
+          <label for="caption" class="form-labels">
+            Caption
+          </label>
+          <input type="text" id="caption" class="caption input" />
+          <input id="choose" class="choose-file-btn" type='file' accept='image/png, image/jpg' />
+          <label for="choose" class="btn choose-btn">
+            Choose File
+          </label>
+          <section class="extra-buttons">
+            <button class="btn view-fav-btn">
+              View 1 Favorites
+            </button>
+            <button class="btn add-img-btn">
+              Add to Album
+            </button>
+          </section>
+        </form>
+      </section>
+    </main>
+
+    <main class="main_photo-field">
+      <section class="album-field">
+      </section>
+    </main><!-- photo field -->
+    
     <script type="text/javascript" src="photo.js"></script>
     <script type="text/javascript" src="main.js"></script>
   </body>
