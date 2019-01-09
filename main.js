@@ -1,5 +1,6 @@
 // --------------------GLOBAL VARIABLES--------------------
 var addToAlbum = document.querySelector(".add-img-btn");
+var searchInput = document.querySelector(".search-bar");
 var photoInput = document.querySelector(".choose-file-btn");
 var titleInput = document.querySelector("#title");
 var captionInput = document.querySelector("#caption");
@@ -17,6 +18,8 @@ addToAlbum.addEventListener("click", stringPhotos);
 cardSection.addEventListener("click", manipulateCard);
 cardSection.addEventListener("keydown", enterCheck);
 cardSection.addEventListener("focusout", contentGrab);
+searchInput.addEventListener("keyup", filterInSearch);
+
 
 // --------------------FUNCTIONS---------------------------
 
@@ -156,4 +159,16 @@ function contentChange(index, className, text) {
   if (className === "card-caption") {
   imagesArr[index].updatePhoto("caption", text);
   } 
+}
+
+function filterInSearch() {
+  photoGallery.innerHTML = ""; 
+  var searchValue = searchInput.value;
+  var filteredArray = imagesArr.filter(function(photo) {
+    return photo.title.includes(searchValue) || photo.caption.includes(searchValue);
+  });
+  filteredArray.forEach(function (photo) {
+    var newPhoto = new Photo(photo.id, photo.title, photo.caption, photo.file, photo.favorite);
+    displayPhotoCard(newPhoto);
+  });
 }
