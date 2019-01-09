@@ -4,7 +4,7 @@ class Photo {
     this.title = title;
     this.caption = caption;
     this.file = file;
-    this.favorite = favorite;
+    this.favorite = favorite || false;
   }
   saveToStorage() {
     localStorage.setItem("imagesArr", JSON.stringify(imagesArr));
@@ -14,10 +14,13 @@ class Photo {
     imagesArr.splice(index, 1);
     this.saveToStorage(imagesArr);
   }
-  updatePhoto() {
+  updatePhoto(category, text) {
     if (event.target.classList.contains("favorite")) {
       this.favorite = !this.favorite;
-      this.saveToStorage(imagesArr);
   }
+    if (category && text) {
+      this[category] = text;
+    }
+      this.saveToStorage(imagesArr);
 }
 }
