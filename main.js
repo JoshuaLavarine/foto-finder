@@ -163,9 +163,11 @@ function contentChange(index, className, text) {
 
 function filterInSearch() {
   photoGallery.innerHTML = ""; 
-  var searchValue = searchInput.value;
+  var searchValue = searchInput.value.toUpperCase();
   var filteredArray = imagesArr.filter(function(photo) {
-    return photo.title.includes(searchValue) || photo.caption.includes(searchValue);
+    var titleSearch = photo.title.toUpperCase(); 
+    var captionSearch = photo.caption.toUpperCase();
+    return titleSearch.includes(searchValue) || captionSearch.includes(searchValue);
   });
   filteredArray.forEach(function (photo) {
     var newPhoto = new Photo(photo.id, photo.title, photo.caption, photo.file, photo.favorite);
