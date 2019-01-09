@@ -16,6 +16,7 @@ window.addEventListener('load', appendPhotos(imagesArr));
 addToAlbum.addEventListener("click", stringPhotos);
 cardSection.addEventListener("click", manipulateCard);
 // cardSection.addEventListener("keydown", editCard);
+window.addEventListener("input", enableAddPhotoButton);
 
 // --------------------FUNCTIONS---------------------------
 //Persist
@@ -113,3 +114,12 @@ function favoriteCard() {
   foundCard.updatePhoto();
 }
 
+function enableAddPhotoButton(e) {
+  e.preventDefault();
+  if (titleInput.value && captionInput.value && photoInput.files[0]) {
+    console.log("Inside button");
+    addToAlbum.disabled = false;
+  } else {
+    addToAlbum.disabled = true; 
+  }
+}
