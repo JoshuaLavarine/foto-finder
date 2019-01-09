@@ -23,13 +23,22 @@ I want to pass this first module very much because I believe that I have proved 
 - CSS
 - JavaScript
 
-# Screen Grab of Static Comp Provided
+# Screen Grab of Static Comp Provided (Desktop Version)
+
+![desktop](https://user-images.githubusercontent.com/40274984/50897330-08e39e80-13c9-11e9-9c64-d329984743c2.png)
+
+# Screen Grab of the Static Site Created (Desktop Version)
+
+![_users_jlavar1_documents_turing_projects_foto-finder_index html_](https://user-images.githubusercontent.com/40274984/50897926-d2a71e80-13ca-11e9-8f97-67b9d84fcc24.png)
+
+# Screen Grab of Static Comp Provided (Mobile Version)
+
+![mobile](https://user-images.githubusercontent.com/40274984/50897336-0da85280-13c9-11e9-8942-9d16922ca5fa.png)
 
 
+# Screen Grab of the Static Site Created (Mobile Version)
 
-# Screen Grab of the Static Site Created
-
-
+![_users_jlavar1_documents_turing_projects_foto-finder_index html_ 1](https://user-images.githubusercontent.com/40274984/50897945-dcc91d00-13ca-11e9-8057-d3eb8147bdbd.png)
 
 # Shortcomings
 
