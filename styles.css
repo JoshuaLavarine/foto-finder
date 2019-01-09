@@ -222,8 +222,8 @@ width: 45%;
 }
 
 #card-img {
-  width: 100%;
-}
+    width: 100%;
+    object-fit: cover;}
 
 .icon {
   height: 2rem;

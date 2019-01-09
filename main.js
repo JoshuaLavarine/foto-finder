@@ -75,7 +75,7 @@ function manipulateCard(e) {
   e.preventDefault();
   var uniqueId = event.target.parentElement.parentElement.parentElement.dataset.id;
   var parsedId = parseInt(uniqueId);
-  // console.log(parsedId);
+  console.log(uniqueId);
   var index = imagesArr.findIndex(function(photo) {
     return photo.id === parsedId;
   })
@@ -92,11 +92,14 @@ function deletePhotoCard() {
   var uniqueId = event.target.parentElement.parentElement.parentElement.dataset.id;
   var parsedId = parseInt(uniqueId);
   console.log(typeof parsedId);
+  console.log(typeof parsedId);
+
   // parsedId.remove();
   var index = imagesArr.findIndex(function(photo) {
     return photo.id === parseInt(parsedId);
   });
-  imagesArr[index].deleteFromStorage();
+  console.log(index);
+  imagesArr[index].deleteFromStorage(index);
   event.target.parentElement.parentElement.parentElement.remove();
 }
 
