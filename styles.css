@@ -7,7 +7,6 @@ body {
   background-color: #C2B2B4;
 }
 
-
 /*---------
   Header
 ---------*/
@@ -73,11 +72,9 @@ h1 {
   padding: 2em 0;
 }
 
-
 /*----------
  Photo Form
 ----------*/
-
 .foto-gen-area {
   display: flex;
   width: 100%;
@@ -89,7 +86,6 @@ h1 {
   width: 70%;
   display: flex;
 }
-
 
 #caption,
 #title {
@@ -144,7 +140,6 @@ button:disabled {
 /*-----------
  Card Album
 -----------*/
-
 .card-photo-container {
   height: 250px;
 }
@@ -172,7 +167,6 @@ button:disabled {
   margin: 2%;
   width: 250px;
 }
-
 
 #card-img {
   height: 250px;
