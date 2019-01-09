@@ -97,10 +97,10 @@ function manipulateCard(e) {
 }}
 
 function deletePhotoCard() {
-  var uniqueId = event.target.parentElement.parentElement.parentElement.dataset.id;
-  var parsedId = parseInt(uniqueId);
+  var clickedCard = event.target.closest("article");
+  var parsedCard = parseInt(clickedCard.dataset.id);
   var index = imagesArr.findIndex(function(photo) {
-    return photo.id === parsedId;
+    return photo.id === parsedCard;
   });
   imagesArr[index].deleteFromStorage(index);
   event.target.parentElement.parentElement.parentElement.remove();

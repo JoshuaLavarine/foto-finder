@@ -10,7 +10,6 @@ class Photo {
     localStorage.setItem("imagesArr", JSON.stringify(imagesArr));
   }
   deleteFromStorage(index) {
-    console.log(index);
     imagesArr.splice(index, 1);
     this.saveToStorage(imagesArr);
   }
