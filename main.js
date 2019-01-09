@@ -12,20 +12,62 @@ var reader = new FileReader();
 
 
 // --------------------EVENT LISTENERS---------------------
-window.addEventListener('load', appendPhotos(imagesArr));
+window.addEventListener("load", appendPhotos(imagesArr));
 addToAlbum.addEventListener("click", stringPhotos);
 cardSection.addEventListener("click", manipulateCard);
 // cardSection.addEventListener("keydown", editCard);
 window.addEventListener("input", enableAddPhotoButton);
+cardSection.addEventListener("keydown", enterCheck);
+cardSection.addEventListener("focusout", contentGrab);
 
 // --------------------FUNCTIONS---------------------------
+function enterCheck(e) {
+  if (e.keyCode === 13) {
+    contentGrab(e);
+    console.log("entercheck");
+  }
+}
+
+function contentGrab(e) {
+  e.preventDefault();
+  var parsedId = parseInt(e.target.parentElement.dataset.id);
+  var index = imagesArr.findIndex(function (image) {
+    return image.id === parsedId;
+  });
+  var targetClass = e.target.className;
+  var targetText = e.target.innerText;
+  contentChange(index, targetClass, targetText);
+}
+
+function contentChange(index, className, text) {
+  if (className === "card-title") {
+  imagesArr[index].updatePhoto("title", text);
+  } 
+  if (className === "card-caption") {
+  imagesArr[index].updatePhoto("caption", text);
+  } 
+}
+
+function getFavNum() {
+  var favoriteArr = imagesArr.filter(function(image) {
+    return image.favorite === true;
+  })
+  updateFavBtn(favoriteArr.length);
+    console.log(favoriteArr.length)
+}
+
+function updateFavBtn(num) {
+  viewFavorites.innerText = `View ${num} Favorites`
+  console.log(num);
+}
 //Persist
 function appendPhotos(array) {
   imagesArr = [];
   array.forEach(function (card) {
     var newPhoto = new Photo(card.id, card.title, card.caption, card.file, card.favorite);
     imagesArr.push(newPhoto);
-    displayPhotoCard(card);
+    displayPhotoCard(newPhoto);
+    getFavNum()
   })
 }
 
@@ -64,7 +106,7 @@ function displayPhotoCard(object) {
               <img class="delete icon" src="assets/delete.svg" />
             </button>
             <button>
-              <img class="favorite icon" src="assets/favorite.svg" />
+              <img class="favorite icon" src=${object.favorite ? "assets/favorite-active.svg" : "assets/favorite.svg"}  >
             </button>
         </section>
       </article>
@@ -76,17 +118,15 @@ function manipulateCard(e) {
   e.preventDefault();
   var uniqueId = event.target.parentElement.parentElement.parentElement.dataset.id;
   var parsedId = parseInt(uniqueId);
-  console.log(uniqueId);
   var index = imagesArr.findIndex(function(photo) {
     return photo.id === parsedId;
   })
   if (event.target.classList.contains("delete")) {
-    console.log(event.target);
     deletePhotoCard();
   }
   if (event.target.classList.contains("favorite")) {
-    console.log(event.target);
     favoriteCard();
+
 }}
 
 function deletePhotoCard() {
@@ -102,16 +142,24 @@ function deletePhotoCard() {
   console.log(index);
   imagesArr[index].deleteFromStorage(index);
   event.target.parentElement.parentElement.parentElement.remove();
+    getFavNum();
+
 }
 
 function favoriteCard() {
   var clickedCard = event.target.closest("article");
-  (console.log(clickedCard + " clicked card html"));
   var parsedCard = parseInt(clickedCard.dataset.id);
   var foundCard = imagesArr.find(function(photo) {
     return photo.id === parsedCard;
   })
+  if (foundCard.favorite === true) {
+    event.target.src = "assets/favorite.svg";
+  } else {
+    event.target.src = "assets/favorite-active.svg"
+  }
   foundCard.updatePhoto();
+  foundCard.saveToStorage();
+  getFavNum();
 }
 
 function enableAddPhotoButton(e) {
