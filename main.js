@@ -4,7 +4,6 @@ var photoInput = document.querySelector(".choose-file-btn");
 var titleInput = document.querySelector("#title");
 var captionInput = document.querySelector("#caption");
 var photoGallery = document.querySelector(".album-field");
-var deleteButton = document.querySelector("#delete-btn");
 var cardSection = document.querySelector(".album-field");
 var viewFavorites = document.querySelector(".view-fav-btn");
 var imagesArr = JSON.parse(localStorage.getItem("imagesArr")) || [];
@@ -13,54 +12,14 @@ var reader = new FileReader();
 
 // --------------------EVENT LISTENERS---------------------
 window.addEventListener("load", appendPhotos(imagesArr));
+window.addEventListener("input", enableAddPhotoButton);
 addToAlbum.addEventListener("click", stringPhotos);
 cardSection.addEventListener("click", manipulateCard);
-// cardSection.addEventListener("keydown", editCard);
-window.addEventListener("input", enableAddPhotoButton);
 cardSection.addEventListener("keydown", enterCheck);
 cardSection.addEventListener("focusout", contentGrab);
 
 // --------------------FUNCTIONS---------------------------
-function enterCheck(e) {
-  if (e.keyCode === 13) {
-    contentGrab(e);
-    console.log("entercheck");
-  }
-}
 
-function contentGrab(e) {
-  e.preventDefault();
-  var parsedId = parseInt(e.target.parentElement.dataset.id);
-  var index = imagesArr.findIndex(function (image) {
-    return image.id === parsedId;
-  });
-  var targetClass = e.target.className;
-  var targetText = e.target.innerText;
-  contentChange(index, targetClass, targetText);
-}
-
-function contentChange(index, className, text) {
-  if (className === "card-title") {
-  imagesArr[index].updatePhoto("title", text);
-  } 
-  if (className === "card-caption") {
-  imagesArr[index].updatePhoto("caption", text);
-  } 
-}
-
-function getFavNum() {
-  var favoriteArr = imagesArr.filter(function(image) {
-    return image.favorite === true;
-  })
-  updateFavBtn(favoriteArr.length);
-    console.log(favoriteArr.length)
-}
-
-function updateFavBtn(num) {
-  viewFavorites.innerText = `View ${num} Favorites`
-  console.log(num);
-}
-//Persist
 function appendPhotos(array) {
   imagesArr = [];
   array.forEach(function (card) {
@@ -69,21 +28,6 @@ function appendPhotos(array) {
     displayPhotoCard(newPhoto);
     getFavNum()
   })
-}
-
-//Don't mess with this one (photo magic happening)
-function stringPhotos() {
-  if (photoInput.files[0]) {
-    reader.readAsDataURL(photoInput.files[0]); 
-    reader.onload = addPhoto
-  }
-}
-
-function addPhoto(e) {
-  var newPhoto = new Photo(Date.now(), titleInput.value, captionInput.value, e.target.result, false);
-  imagesArr.push(newPhoto);
-  newPhoto.saveToStorage();
-  displayPhotoCard(newPhoto);
 }
 
 function displayPhotoCard(object) {
@@ -112,7 +56,31 @@ function displayPhotoCard(object) {
     </article>
   `
 }
-//keep functions under 10 lines
+
+function getFavNum() {
+  var favoriteArr = imagesArr.filter(function(image) {
+    return image.favorite === true;
+  })
+  updateFavBtn(favoriteArr.length);
+}
+
+function updateFavBtn(num) {
+  viewFavorites.innerText = `View ${num} Favorites`;
+}
+
+function stringPhotos() {
+  if (photoInput.files[0]) {
+    reader.readAsDataURL(photoInput.files[0]); 
+    reader.onload = addPhoto;
+  }
+}
+
+function addPhoto(e) {
+  var newPhoto = new Photo(Date.now(), titleInput.value, captionInput.value, e.target.result, false);
+  imagesArr.push(newPhoto);
+  newPhoto.saveToStorage();
+  displayPhotoCard(newPhoto);
+}
 
 function manipulateCard(e) {
   e.preventDefault();
@@ -126,24 +94,17 @@ function manipulateCard(e) {
   }
   if (event.target.classList.contains("favorite")) {
     favoriteCard();
-
 }}
 
 function deletePhotoCard() {
   var uniqueId = event.target.parentElement.parentElement.parentElement.dataset.id;
   var parsedId = parseInt(uniqueId);
-  console.log(typeof parsedId);
-  console.log(typeof parsedId);
-
-  // parsedId.remove();
   var index = imagesArr.findIndex(function(photo) {
-    return photo.id === parseInt(parsedId);
+    return photo.id === parsedId;
   });
-  console.log(index);
   imagesArr[index].deleteFromStorage(index);
   event.target.parentElement.parentElement.parentElement.remove();
-    getFavNum();
-
+  getFavNum();
 }
 
 function favoriteCard() {
@@ -165,9 +126,34 @@ function favoriteCard() {
 function enableAddPhotoButton(e) {
   e.preventDefault();
   if (titleInput.value && captionInput.value && photoInput.files[0]) {
-    console.log("Inside button");
     addToAlbum.disabled = false;
   } else {
     addToAlbum.disabled = true; 
   }
+}
+
+function enterCheck(e) {
+  if (e.keyCode === 13) {
+    contentGrab(e);
+  }
+}
+
+function contentGrab(e) {
+  e.preventDefault();
+  var parsedId = parseInt(e.target.parentElement.dataset.id);
+  var index = imagesArr.findIndex(function (image) {
+    return image.id === parsedId;
+  });
+  var targetClass = e.target.className;
+  var targetText = e.target.innerText;
+  contentChange(index, targetClass, targetText);
+}
+
+function contentChange(index, className, text) {
+  if (className === "card-title") {
+  imagesArr[index].updatePhoto("title", text);
+  } 
+  if (className === "card-caption") {
+  imagesArr[index].updatePhoto("caption", text);
+  } 
 }
