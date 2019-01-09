@@ -113,30 +113,3 @@ function favoriteCard() {
   foundCard.updatePhoto();
 }
 
-// function editCard(event) {
-//   if(!event){
-//     return
-//   }
-//   var uniqueID = event.target.parentElement.dataset.id;
-//   console.log(uniqueID + " card unique ID");
-//   var foundPhotoCard = imagesArr.find(function(photo) {
-//     console.log(foundPhotoCard + " foundPhotoCard")
-//     return photo.id === parseInt(uniqueID);
-//     })
-//   if (event.target.id === 'card-title') {
-//     var editTitle = event.target.innerText;
-//     foundPhotoCard.title = editTitle;
-//     foundPhotoCard.saveToStorage();
-//   }
-//    if (event.target.id === 'card-caption') {
-//     var editCaption = event.target.innerText;
-//     foundPhotoCard.body = editCaption;
-//     foundPhotoCard.saveToStorage();
-//   }
-//   if (event.keyCode === 13) {
-//     event.target.toggleAttribute('contenteditable');
-//   }
-
-//   if (event.keyCode === 13) {
-//     event.target.toggleAttribute('contenteditable');
-//   }
