@@ -16,6 +16,7 @@ window.addEventListener('load', appendPhotos(imagesArr));
 addToAlbum.addEventListener("click", stringPhotos);
 cardSection.addEventListener("click", manipulateCard);
 // cardSection.addEventListener("keydown", editCard);
+window.addEventListener("input", enableAddPhotoButton);
 
 // --------------------FUNCTIONS---------------------------
 //Persist
@@ -75,7 +76,7 @@ function manipulateCard(e) {
   e.preventDefault();
   var uniqueId = event.target.parentElement.parentElement.parentElement.dataset.id;
   var parsedId = parseInt(uniqueId);
-  // console.log(parsedId);
+  console.log(uniqueId);
   var index = imagesArr.findIndex(function(photo) {
     return photo.id === parsedId;
   })
@@ -92,11 +93,14 @@ function deletePhotoCard() {
   var uniqueId = event.target.parentElement.parentElement.parentElement.dataset.id;
   var parsedId = parseInt(uniqueId);
   console.log(typeof parsedId);
+  console.log(typeof parsedId);
+
   // parsedId.remove();
   var index = imagesArr.findIndex(function(photo) {
     return photo.id === parseInt(parsedId);
   });
-  imagesArr[index].deleteFromStorage();
+  console.log(index);
+  imagesArr[index].deleteFromStorage(index);
   event.target.parentElement.parentElement.parentElement.remove();
 }
 
@@ -110,30 +114,12 @@ function favoriteCard() {
   foundCard.updatePhoto();
 }
 
-// function editCard(event) {
-//   if(!event){
-//     return
-//   }
-//   var uniqueID = event.target.parentElement.dataset.id;
-//   console.log(uniqueID + " card unique ID");
-//   var foundPhotoCard = imagesArr.find(function(photo) {
-//     console.log(foundPhotoCard + " foundPhotoCard")
-//     return photo.id === parseInt(uniqueID);
-//     })
-//   if (event.target.id === 'card-title') {
-//     var editTitle = event.target.innerText;
-//     foundPhotoCard.title = editTitle;
-//     foundPhotoCard.saveToStorage();
-//   }
-//    if (event.target.id === 'card-caption') {
-//     var editCaption = event.target.innerText;
-//     foundPhotoCard.body = editCaption;
-//     foundPhotoCard.saveToStorage();
-//   }
-//   if (event.keyCode === 13) {
-//     event.target.toggleAttribute('contenteditable');
-//   }
-
-//   if (event.keyCode === 13) {
-//     event.target.toggleAttribute('contenteditable');
-//   }
+function enableAddPhotoButton(e) {
+  e.preventDefault();
+  if (titleInput.value && captionInput.value && photoInput.files[0]) {
+    console.log("Inside button");
+    addToAlbum.disabled = false;
+  } else {
+    addToAlbum.disabled = true; 
+  }
+}
