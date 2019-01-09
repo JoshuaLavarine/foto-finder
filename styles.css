@@ -66,7 +66,7 @@ h1 {
   width: 100%;
 }
 
-.main_photo-inputs {
+.main-photo-inputs {
   background-color:#3E2A35;
   display: flex;
   padding: 2em 0;
@@ -144,7 +144,7 @@ button:disabled {
   height: 250px;
 }
 
-.main_photo-field {
+.main-photo-field {
   padding: 2em;
   background-color: #c2b2b4;
   margin: 0px;
@@ -263,7 +263,7 @@ button:disabled {
 }
 
 @media only screen and (max-width: 426px) {
-  .main_photo-field {
+  .main-photo-field {
     padding: 0;
   }
 

@@ -90,27 +90,27 @@ function displayPhotoCard(object) {
   photoGallery.innerHTML += 
   `
     <article class="card" data-id=${object.id}>
-        <h2 class="card-title" contenteditable="true">
-            ${object.title}
-        </h2>
-        <section class="card-photo-container">
-           <img id="card-img" src=${object.file} />
-        </section>
-        <section class="card-caption" contenteditable="true">
-          <p class="card-caption-copy">
-            ${object.caption}
-          </p>
-        </section>
-        <section class="card-buttons">
-            <button id="delete-btn">
-              <img class="delete icon" src="assets/delete.svg" />
-            </button>
-            <button>
-              <img class="favorite icon" src=${object.favorite ? "assets/favorite-active.svg" : "assets/favorite.svg"}  >
-            </button>
-        </section>
-      </article>
-    `
+      <h2 class="card-title" contenteditable="true">
+          ${object.title}
+      </h2>
+      <section class="card-photo-container">
+         <img id="card-img" src=${object.file}>
+      </section>
+      <section class="card-caption" contenteditable="true">
+        <p class="card-caption-copy">
+          ${object.caption}
+        </p>
+      </section>
+      <section class="card-buttons">
+          <button id="delete-btn">
+            <img class="delete icon" src="assets/delete.svg">
+          </button>
+          <button>
+            <img class="favorite icon" src=${object.favorite ? "assets/favorite-active.svg" : "assets/favorite.svg"}>
+          </button>
+      </section>
+    </article>
+  `
 }
 //keep functions under 10 lines
 
